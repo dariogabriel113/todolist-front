@@ -45,4 +45,23 @@ export class TodoService {
 
     return []
   }
+
+  static editarTodo = async (id, titulo, descricao, finalizado) => {
+    try {
+      const response = await fetch(BASE_URL, {
+        method: 'PUT',
+        headers: {
+          Accept: 'application/json',
+          'Content-type': 'application/json',
+        },
+        body: JSON.stringify({ id, titulo, descricao, finalizado }),
+      })
+      const json = await response.json()
+      return json
+    } catch (err) {
+      console.log(err)
+    }
+
+    return []
+  }
 }

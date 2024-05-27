@@ -22,6 +22,12 @@ function HomePage() {
     setDescricao(evt.target.value);
   }
 
+  const onChangeTodo = (evt) => {
+    setIdTodo(evt.id);
+    setTitulo(evt.titulo);
+    setDescricao(evt.descricao);
+  }
+
   const limparCampos = () => {
     setIdTodo("");
     setTitulo("");
@@ -41,6 +47,13 @@ function HomePage() {
     limparCampos();
   }
 
+  const editarTodo = async (evt) => {
+    evt.preventDefault();
+    const retornoTodos = await TodoService.editarTodo(idTodo, titulo, descricao, false);
+    setTodos(retornoTodos);
+    limparCampos();
+  }
+
   const apagarTodo = async (evt) => {
     const retornoTodos = await TodoService.apagarTodo(evt.id);
     setTodos(retornoTodos);
@@ -49,7 +62,7 @@ function HomePage() {
   return (
     <div>
       <div>
-        <form onSubmit={criarTodo}>
+        <form onSubmit={idTodo !== "" ? editarTodo : criarTodo}>
           <div>To Do List</div>
           <input type='text' name='titulo' placeholder='Titulo' value={titulo} onChange={onChangeTitulo} />
           <input
@@ -69,7 +82,7 @@ function HomePage() {
             <div>
               {todo.titulo} {todo.descricao !== "" ? " - " + todo.descricao : ""}
               <div>
-                <button>Editar</button>
+                <button onClick={() => onChangeTodo(todo)}>Editar</button>
                 <button onClick={() => apagarTodo(todo)}>Apagar</button>
               </div>
             </div>
