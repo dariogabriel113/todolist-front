@@ -31,4 +31,18 @@ export class TodoService {
 
     return []
   }
+
+  static apagarTodo = async (id) => {
+    try {
+      const response = await fetch(BASE_URL + "/" + id, {
+        method: 'DELETE',
+      })
+      const json = await response.json()
+      return json
+    } catch (err) {
+      console.log(err)
+    }
+
+    return []
+  }
 }

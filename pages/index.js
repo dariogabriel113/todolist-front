@@ -41,6 +41,11 @@ function HomePage() {
     limparCampos();
   }
 
+  const apagarTodo = async (evt) => {
+    const retornoTodos = await TodoService.apagarTodo(evt.id);
+    setTodos(retornoTodos);
+  }
+
   return (
     <div>
       <div>
@@ -63,6 +68,10 @@ function HomePage() {
 
             <div>
               {todo.titulo} {todo.descricao !== "" ? " - " + todo.descricao : ""}
+              <div>
+                <button>Editar</button>
+                <button onClick={() => apagarTodo(todo)}>Apagar</button>
+              </div>
             </div>
 
           )
