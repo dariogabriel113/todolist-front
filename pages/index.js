@@ -69,29 +69,31 @@ function HomePage() {
   return (
     <div>
       <div>
-        <form onSubmit={idTodo !== "" ? editarTodo : criarTodo}>
-          <div>To Do List</div>
-          <input type='text' name='titulo' placeholder='Titulo' value={titulo} onChange={onChangeTitulo} />
-          <input
-            type='text'
-            placeholder='Descrição'
-            name='descricao'
-            value={descricao}
-            onChange={onChangeDescricao}
-          />
+        <div style={{ marginBottom: "16px" }}>
+          <form onSubmit={idTodo !== "" ? editarTodo : criarTodo}>
+            <div>To Do List</div>
+            <input type='text' name='titulo' placeholder='Titulo' value={titulo} onChange={onChangeTitulo} />
+            <input
+              type='text'
+              placeholder='Descrição'
+              name='descricao'
+              value={descricao}
+              onChange={onChangeDescricao}
+            />
 
-          <button>Salvar</button>
-        </form>
+            <button>Salvar</button>
+          </form>
+        </div>
 
         {todos.map(todo => {
           return (
 
-            <div>
+            <div style={{ marginBottom: "16px" }}>
               <input type='checkbox' name={todo.id} id={todo.id} checked={todo.finalizado} onChange={() => alteraStatusTodo(todo)} />
               {todo.titulo} {todo.descricao !== "" ? " - " + todo.descricao : ""}
               <div>
-                <button onClick={() => onChangeTodo(todo)}>Editar</button>
-                <button onClick={() => apagarTodo(todo)}>Apagar</button>
+                <button style={{ margin: "8px" }} onClick={() => onChangeTodo(todo)}>Editar</button>
+                <button style={{ margin: "8px" }} onClick={() => apagarTodo(todo)}>Apagar</button>
               </div>
             </div>
 
