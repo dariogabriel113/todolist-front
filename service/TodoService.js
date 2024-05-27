@@ -12,4 +12,23 @@ export class TodoService {
 
     return [];
   }
+
+  static criarTodo = async (titulo, descricao) => {
+    try {
+      const response = await fetch(BASE_URL, {
+        method: 'POST',
+        headers: {
+          Accept: 'application/json',
+          'Content-type': 'application/json',
+        },
+        body: JSON.stringify({ titulo, descricao }),
+      })
+      const json = await response.json()
+      return json
+    } catch (err) {
+      console.log(err)
+    }
+
+    return []
+  }
 }
