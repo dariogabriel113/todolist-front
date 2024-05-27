@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react';
 import { TodoService } from '../service/TodoService';
+import { Button, Input } from '@mui/material';
+
 
 function HomePage() {
   const [idTodo, setIdTodo] = useState('');
@@ -66,14 +68,15 @@ function HomePage() {
     limparCampos();
   }
 
+
   return (
     <div>
       <div>
-        <div style={{ marginBottom: "16px" }}>
+        <div style={{ margin: "16px" }}>
           <form onSubmit={idTodo !== "" ? editarTodo : criarTodo}>
-            <div>To Do List</div>
-            <input type='text' name='titulo' placeholder='Titulo' value={titulo} onChange={onChangeTitulo} />
-            <input
+            <div style={{margin: 8}}>To Do List</div>
+            <Input style={{margin: 16}} name='titulo' placeholder='Titulo' value={titulo} onChange={onChangeTitulo} />
+            <Input style={{margin: 16}}
               type='text'
               placeholder='Descrição'
               name='descricao'
@@ -81,24 +84,25 @@ function HomePage() {
               onChange={onChangeDescricao}
             />
 
-            <button>Salvar</button>
+            <button >Salvar</button>
           </form>
         </div>
 
         {todos.map(todo => {
           return (
 
-            <div style={{ marginBottom: "16px" }}>
+            <div style={{margin: 16}}>
               <input type='checkbox' name={todo.id} id={todo.id} checked={todo.finalizado} onChange={() => alteraStatusTodo(todo)} />
               {todo.titulo} {todo.descricao !== "" ? " - " + todo.descricao : ""}
-              <div>
-                <button style={{ margin: "8px" }} onClick={() => onChangeTodo(todo)}>Editar</button>
-                <button style={{ margin: "8px" }} onClick={() => apagarTodo(todo)}>Apagar</button>
+              <div style={{margin: 8}}>
+                <Button style={{margin: 8}} variant="contained" onClick={() => onChangeTodo(todo)}>Editar</Button>
+                <Button style={{margin: 8}} variant="contained" color='error' onClick={() => apagarTodo(todo)}>Apagar</Button>
               </div>
             </div>
 
           )
         })}
+        
 
       </div>
     </div>
