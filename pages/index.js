@@ -59,6 +59,13 @@ function HomePage() {
     setTodos(retornoTodos);
   }
 
+  const alteraStatusTodo = async (evt) => {
+    console.log(evt);
+    const retornoTodos = await TodoService.editarTodo(evt.id, evt.titulo, evt.descricao, !evt.finalizado);
+    setTodos(retornoTodos);
+    limparCampos();
+  }
+
   return (
     <div>
       <div>
@@ -80,6 +87,7 @@ function HomePage() {
           return (
 
             <div>
+              <input type='checkbox' name={todo.id} id={todo.id} checked={todo.finalizado} onChange={() => alteraStatusTodo(todo)} />
               {todo.titulo} {todo.descricao !== "" ? " - " + todo.descricao : ""}
               <div>
                 <button onClick={() => onChangeTodo(todo)}>Editar</button>
